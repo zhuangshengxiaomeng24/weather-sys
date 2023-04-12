@@ -4,7 +4,7 @@ import Loginin from './view/Loginin.vue'
 import Register from './view/Register.vue'
 import Forget from './view/Forget.vue'
 import Wind from './view/Wind.vue'
-import Nino from './view/Nino.vue'
+import ElNino from './view/Nino.vue'
 import { createRouter, createWebHashHistory } from 'vue-router';
 
 const routes = [
@@ -36,7 +36,7 @@ const routes = [
   },
   {
     path:'/nino',
-    component:Nino
+    component:ElNino
   },
 ]
 

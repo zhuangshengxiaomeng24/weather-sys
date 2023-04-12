@@ -1,5 +1,5 @@
 <template>
-  <div class="Footer">
+  <div class="FooterNav">
     <div class="icongroup">
       <img src="../assets/signin/scut.png" />
       <img src="../assets/signin/sysu.png" />
@@ -22,13 +22,13 @@
 
 <script>
 export default {
-  name: "Footer",
+  name: "FooterNav",
   methods: {},
 };
 </script>
 
 <style scoped>
-.Footer {
+.FooterNav {
   display: flex;
   margin-top: 20px;
   /* height: 150px; */

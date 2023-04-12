@@ -2,13 +2,13 @@
   <div id="app">
     <Navbar />
     <router-view></router-view>
-    <Footer></Footer>
+    <FooterNav></FooterNav>
     <div v-show="state.isShowMsg" :class="['msg', state.msgType]">
       <div class="msg-icon">
-        <el-icon v-if="state.msgType == 'ok'" class="ok-icon"
+        <el-icon v-if="state.msgType === 'ok'" class="ok-icon"
           ><circle-check-filled
         /></el-icon>
-        <el-icon v-else-if="state.msgType == 'error'" class="err-icon"
+        <el-icon v-else-if="state.msgType === 'error'" class="err-icon"
           ><circle-close-filled
         /></el-icon>
       </div>
@@ -18,14 +18,14 @@
 </template>
 
 <script>
-import Navbar from "@/components/Navbar.vue";
-import Footer from "@/components/Footer.vue";
+import Navbar from "./components/Navbar.vue";
+import FooterNav from "./components/Footer.vue";
 
 export default {
   name: "App",
   components: {
     Navbar,
-    Footer,
+    FooterNav,
   },
   data(){
     return{
@@ -55,14 +55,16 @@ body {
   transform: translateX(-50%);
   padding: 10px;
   width: fit-content;
-  color: var(--color1-dark);
+  /*color: var(--color1-dark);*/
   font-size: 20px;
+  color: darkblue;
   font-weight: bolder;
   letter-spacing: 1px;
   border-radius: 10px;
   animation: showmsg 500ms ease;
   z-index: 9999;
-  background-color: var(--color2-light);
+  /*background-color: var(--color2-light);*/
+  background-color: lightblue;
   display: flex;
   align-items: center;
   justify-content: space-around;
