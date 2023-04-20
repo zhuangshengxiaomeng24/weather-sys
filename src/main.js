@@ -7,6 +7,8 @@ import VCharts from 'v-charts'
 import store from './store/index'
 import axios from 'axios';
 import * as echarts from "echarts";
+// import ElementUI from 'element-ui';
+// import 'element-ui/lib/theme-chalk/index.css';
 
 //请求默认地址
 axios.defaults.baseURL = "http://127.0.0.1:8080/";
@@ -22,5 +24,5 @@ app.use(ElementPlus)
 app.use(routers)
 app.use(store)
 app.use(VCharts)
-
+// app.use(ElementUI);
 app.mount('#app')

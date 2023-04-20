@@ -1,10 +1,37 @@
 <!--name: 'ThermalMap',-->
 <template>
+  <div class="container">
+    <div class="block">
+      <div class="demonstration">选择年份及月份</div>
+      <div class="picker">
+        <el-date-picker
+            v-model="value"
+            type="month"
+            placeholder="选择月"
+            @change="clicked">
+        </el-date-picker>
+      </div>
+    </div>
+  </div>
+
   <div class="echarts-box">
-<!--    <div id="myEcharts" :style="{ width: this.width, height: this.height }"></div>-->
+    <!--    <div id="myEcharts" :style="{ width: this.width, height: this.height }"></div>-->
     <div id="myChart" :style="{ width: this.width, height: this.height }"></div>
     <div id="charts" ref="chart" :style="{ width: this.width, height: this.height }"></div>
   </div>
+  <div class="container">
+    <div class="block">
+      <div class="demonstration">选择年份及月份</div>
+      <!--      暂时设为value2，将value数据规范化后可统一-->
+      <el-slider
+          v-model="value2"
+          :step="1"
+          :max="500"
+          :format-tooltip="formatTooltip"
+      ></el-slider>
+    </div>
+  </div>
+
 </template>
 
 <script>
@@ -23,7 +50,7 @@ export default {
     height: String,
     data: {
       type: Array,
-      required: true
+      required: true,
     }
   },
   setup() {
@@ -92,7 +119,7 @@ export default {
           {
             type: 'heatmap',
             coordinateSystem: 'geo',
-            data: data.map(({ name, value }) => ({
+            data: data.map(({name, value}) => ({
               name,
               value: [Math.random() * 360 - 180, Math.random() * 180 - 90, value],
             })),
@@ -160,48 +187,49 @@ export default {
       };
     }
 
- /*   function initChart() {
-      let chart = myEcharts.init(document.getElementById("myEcharts"), "purple-passion");
-      chart.setOption({
-        title: {
-          text: "厄尔尼诺现象预测",
-          left: "center",
-        },
-        xAxis: {
-          type: "category",
-          data: [
-            "一月", "二月", "三月", "四月", "五月", "六月", "七月", "八月", "九月", "十月", "十一月", "十二月"
-          ]
-        },
-        tooltip: {
-          trigger: "axis"
-        },
-        yAxis: {
-          type: "value"
-        },
-        series: [
-          {
-            data: [
-              606, 542, 985, 687, 501, 787, 339, 706, 383, 684, 669, 737
-            ],
-            type: "line",
-            smooth: true,
-            itemStyle: {
-              normal: {
-                label: {
-                  show: true,
-                  position: "top",
-                  formatter: "{c}"
-                }
-              }
-            }
-          }
-        ]
-      });
-      window.onresize = function () {
-        chart.resize();
-      };
-    }*/
+    /*   function initChart() {
+         let chart = myEcharts.init(document.getElementById("myEcharts"), "purple-passion");
+         chart.setOption({
+           title: {
+             text: "厄尔尼诺现象预测",
+             left: "center",
+           },
+           xAxis: {
+             type: "category",
+             data: [
+               "一月", "二月", "三月", "四月", "五月", "六月", "七月", "八月", "九月", "十月", "十一月", "十二月"
+             ]
+           },
+           tooltip: {
+             trigger: "axis"
+           },
+           yAxis: {
+             type: "value"
+           },
+           series: [
+             {
+               data: [
+                 606, 542, 985, 687, 501, 787, 339, 706, 383, 684, 669, 737
+               ],
+               type: "line",
+               smooth: true,
+               itemStyle: {
+                 normal: {
+                   label: {
+                     show: true,
+                     position: "top",
+                     formatter: "{c}"
+                   }
+                 }
+               }
+             }
+           ]
+         });
+         window.onresize = function () {
+           chart.resize();
+         };
+       }*/
+
 
     return {
       // initChart,
@@ -211,8 +239,28 @@ export default {
   data() {
     return {
       chart: null,
+      value: '',
+      value2: ''
     };
   },
+  methods: {
+    clicked() {
+      console.log(this.value)
+    },
+    formatTooltip(val) {
+      let year = 1970 + parseInt(val / 12)
+      let month = 1 + parseInt(val % 12)
+      console.log(year + "-" + month)
+      if (month < 10) {
+        month = '0' + month.toString()
+      } else {
+        month = month.toString()
+      }
+      let date = year + "-" + month
+      console.log(date)
+      return date
+    }
+  }
   // methods: {
   //   getWorld (data) {
   //     var that = this
@@ -383,16 +431,24 @@ export default {
 }
 </script>-->
 
-<!--<style scoped>
-.wrapper {
-  width: 100%;
+<style scoped>
+.container {
+  display: flex;
+  justify-content: center;
 }
-.wrapper .chart {
-  width: 80%;
-  margin:0 auto;
-  height: 600px;
-  border: 1px solid #eeeeee;
-  /* background: url(../../public/static/bg.png) no-repeat; 背景图设置*/
-  background-size: 100% 100%;
+
+.block {
+  width: 60%;
+  display: block;
+
+.demonstration {
+  font-size: medium;
+  font-weight: bold;
 }
-</style>-->
+
+.picker {
+  padding: 20px;
+}
+
+}
+</style>

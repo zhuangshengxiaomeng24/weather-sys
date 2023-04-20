@@ -1,5 +1,5 @@
 <template>
-  <div style="height: 500px;">厄尔尼诺现象</div>
+  <div style="height: 200px;">厄尔尼诺现象</div>
   <ThermalMap :width="'900px'" :height="'600px'"></ThermalMap>
 </template>
 
